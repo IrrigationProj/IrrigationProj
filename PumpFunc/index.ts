@@ -19,7 +19,7 @@ serve(async (req) => {
   }
 
   // Define moisture threshold
-  const threshold = 1600;
+  const threshold = 2000;
 
   // Determine pump statuses
   const pump1Status = data.every(row => row.Sensor_1 < threshold) ? "off" : "on";
