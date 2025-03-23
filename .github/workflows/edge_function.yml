@@ -1,20 +1,21 @@
-name: Run Supabase Edge Function
+name: Run Supabase Edge Function Every 5 Minutes
 
 on:
-  workflow_dispatch:  # Allows manual triggering
   schedule:
-    - cron: "*/5 * * * *" # Runs every 5 minutes
+    - cron: "*/5 * * * *"  # Runs every 5 minutes
+  workflow_dispatch: # Allows manual triggering
 
 jobs:
-  run-edge-function:
+  call_supabase_function:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Supabase Edge Function Every 30s
+      - name: Call Supabase Edge Function Every 30 Seconds (Loop for 5 Min)
         run: |
-          for i in {1..10}; do
-            curl -X POST "https://lzmdwphknysxryhxgokq.functions.supabase.co/PumpFunc" \
-                 -H "Authorization: Bearer ${{ secrets.SUPABASE_SECRET_KEY }}" \
-                 -H "Content-Type: application/json"
-            echo "Supabase Edge Function executed at $(date)"
-            sleep 30  # Wait for 30 seconds before next request
+          for i in {1..10}
+          do
+            curl -X POST "https://lzmdwphknysxryhxgokq.supabase.co/functions/v1/PumpFunc" \
+              -H "Authorization: Bearer ${{ secrets.SUPABASE_SECRET }}" \
+              -H "Content-Type: application/json" \
+              -d '{}'
+            sleep 30
           done
