@@ -1,6 +1,7 @@
 name: Run Supabase Edge Function
 
 on:
+  workflow_dispatch:  # Allows manual triggering
   schedule:
     - cron: "*/5 * * * *" # Runs every 5 minutes
 
