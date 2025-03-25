@@ -15,7 +15,7 @@ jobs:
           do
             curl -X POST "https://lzmdwphknysxryhxgokq.functions.supabase.co/PumpFunc" \
               -H "Content-Type: application/json" \
-              -H "Authorization: Bearer ${{ secrets.SUPABASE_SECRET }}" \
-              --data "$(echo '{}' | jq -c .)"
+              -H "Authorization: Bearer ${{ secrets.SUPABASE_SECRET_KEY }}" \
+              --data '{}'
             sleep 30
           done
