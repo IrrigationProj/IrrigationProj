@@ -3,7 +3,7 @@ name: Run Supabase Edge Function Every 5 Minutes
 on:
   schedule:
     - cron: "*/5 * * * *"  # Runs every 5 minutes
-  workflow_dispatch: # Allows manual triggering
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   call_supabase_function:
@@ -13,9 +13,9 @@ jobs:
         run: |
           for i in {1..10}
           do
-            curl -X POST "https://lzmdwphknysxryhxgokq.supabase.co/functions/v1/PumpFunc" \
-              -H "Authorization: Bearer ${{ secrets.SUPABASE_SECRET }}" \
+            curl -X POST "https://lzmdwphknysxryhxgokq.functions.supabase.co/PumpFunc" \
               -H "Content-Type: application/json" \
-              -d '{}'
+              -H "Authorization: Bearer ${{ secrets.SUPABASE_SECRET }}" \
+              --data "$(echo '{}' | jq -c .)"
             sleep 30
           done
